@@ -73,6 +73,9 @@ Example from NZBGeek:
 **Advanced Settings:**
 
 - **Priority**: `25` (lower = higher priority)
+- **Timeout**: `30` seconds
+- **Retries**: `3`
+- **Rate Limit**: Leave default
 - **Automatic search**: enable for background monitoring searches
 - **Interactive search**: enable for manual searches
 
