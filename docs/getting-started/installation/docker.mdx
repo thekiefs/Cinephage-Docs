@@ -135,7 +135,7 @@ Update the volume paths to match your system:
 | `/data` | `/mnt/user/data` | Single shared root: media library AND downloads live underneath |
 
 :::warning[Important]
-To make hardlinks work, mount a **single shared root** in **every** container — e.g. `Container /data → Host /mnt/user/data/` on Cinephage *and* your download client — and keep downloads and library underneath it (`/data/downloads`, `/data/media`). Separate binds (`/media` + `/downloads`, or two Unraid shares) look fine on the host but are different filesystems inside the containers, so hardlink creation fails (`EXDEV`) and every import **silently falls back to a full copy** (2x disk space, still seeding the original). The same rule applies to your client's Default + Incomplete folders: both must sit under `/data/...`.
+To make hardlinks work, mount a **single shared root** in **every** container — e.g. `Container /data → Host /mnt/user/data/` on Cinephage *and* your download client — and keep downloads and library underneath it (`/data/downloads`, `/data/media`). Separate binds (`/media` + `/downloads`, or two Unraid shares) look fine on the host but are different filesystems inside the containers, so files may be duplicated between your download client and Cinephage if not set up properly.
 :::
 
 **Common path examples (single-root layout):**

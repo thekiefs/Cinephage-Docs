@@ -156,17 +156,12 @@ Before diving into specific issues, perform these checks:
 
    Same device + same inode with `Links: 2` = hardlinked (0 extra space). Same size but different inodes with `Links: 1` = full copy (2x space) — recheck mounts.
 
-3. **Decode `Permission denied (13)`:**
-   - Transmission log `open-files.cc ... Permission denied` naming a client path = the *download client* daemon user cannot create there (check its PUID/PGID vs folder owner, and stale `/user/...` vs `/data/...` dirs)
-   - Node `stat` EACCES on the mapped local path during import = *Cinephage* cannot read there
-   - `namei -l` on the full path shows which component denies
-
-4. **Check file permissions:**
+3. **Check file permissions:**
    - Verify PUID/PGID in docker-compose.yaml
    - Ensure Cinephage can read download folder
    - Check file ownership in downloads directory
 
-5. **Check volume mounts (single shared root):**
+4. **Check volume mounts (single shared root):**
 
    ```yaml
    # Verify these paths exist and are correct
@@ -175,7 +170,7 @@ Before diving into specific issues, perform these checks:
      - /mnt/user/data:/data # media AND downloads underneath
    ```
 
-6. **Check logs:**
+5. **Check logs:**
 
    ```bash
    docker compose logs cinephage | grep -i import
@@ -183,7 +178,7 @@ Before diving into specific issues, perform these checks:
 
    Look for the transfer mode (`hardlink` vs `copy` fallback).
 
-7. **Manual import test:**
+6. **Manual import test:**
    - Go to **Library > Import**
    - Try importing the file manually
    - Check for specific error messages
